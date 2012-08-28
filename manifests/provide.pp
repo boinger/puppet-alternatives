@@ -1,9 +1,11 @@
 define alternatives::provide(
-  $link,
+  $alternative_name,
   $path,
   $priority
 ){
-  exec { "alternatives --install ${link} ${name} ${path} ${priority}":
-    unless => "alternatives --display ${name} | grep -q '${path} - priority ${priority}'"
+  include ::alternatives
+  exec { "provide_alternative_${alternative_name}_${name}":
+    command => "${alternatives::bin} --install ${name} ${alternative_name} ${path} ${priority}",
+    unless => "${alternatives::bin} --display ${alternative_name} | grep -q '${path} - priority ${priority}'"
   }
 }

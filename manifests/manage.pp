@@ -1,6 +1,7 @@
 define alternatives::manage($target){
+  include ::alternatives
   exec{"manage_alternatives_${name}":
-    command => "alternatives --set ${name} ${target}",
-    unless  => "alternatives --display ${name} | grep 'points to' | grep -q '${target}'",
+    command => "${alternatives::bin} --set ${name} ${target}",
+    unless  => "${alternatives::bin} --display ${name} | grep 'points to' | grep -q '${target}'",
   }
 }
