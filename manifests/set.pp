@@ -12,6 +12,8 @@ define alternatives::set(
   }
 
   alternatives::manage {
-    $name: target_path => $target_path;
+    $name:
+      target_path => $target_path,
+      require     => Alternatives::Provide[$name];
   }
 }
