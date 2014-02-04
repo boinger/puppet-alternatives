@@ -6,12 +6,12 @@ define alternatives::set(
   include ::alternatives
   alternatives::provide {
     $name:
-      alternative_name => $short_path,
-      path             => $target_path,
-      priority         => $priority;
+      short_path  => $short_path,
+      target_path => $target_path,
+      priority    => $priority;
   }
 
   alternatives::manage {
-    $name: target => $target_path;
+    $name: target_path => $target_path;
   }
 }
